@@ -1,22 +1,9 @@
 <div id="<%= dom_id user %>">
-  <p>
-    <strong>Name:</strong>
-    <%= user.name %>
-  </p>
-
-  <p>
-    <strong>Email:</strong>
-    <%= user.email %>
-  </p>
-
-  <p>
-    <strong>Phone:</strong>
-    <%= user.phone %>
-  </p>
-
-  <p>
-    <strong>Cpf:</strong>
-    <%= user.cpf %>
-  </p>
-
+    <tr>
+      <td><%= user.name.capitalize %></td>
+      <td><%= user.email.downcase %></td>
+      <td><%= user.phone %></td>
+      <td><%= user.cpf %></td>
+      <td><%= link_to 'Show details', user, class:"btn btn-sm btn-secondary" %></td>
+    </tr>
 </div>

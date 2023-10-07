@@ -1,8 +1,9 @@
-EMAIL_REGEX = /\A([^@\s]+)@((?:[-a-z0-9]+\.)+[a-z]{2,})\z/i
-CPF_REGEX = /\A(\d{3}\.){2}\d{3}-\d{2}\z/i
-PHONE_REGEX = /\A(\(\d{2}\)|\d{2})(\s)*\d{4,5}-?\d{4}\z/i
 
 class User < ApplicationRecord
+  EMAIL_REGEX = /\A([^@\s]+)@((?:[-a-z0-9]+\.)+[a-z]{2,})\z/i
+  CPF_REGEX = /\A(\d{3}\.){2}\d{3}-\d{2}\z/i
+  PHONE_REGEX = /\A(\(\d{2}\)|\d{2})(\s)*\d{4,5}-?\d{4}\z/i
+
   # Validates the presence of the name attribute
   validates :name, presence: true
   # Validates the presence of the phone attribute
@@ -17,4 +18,9 @@ class User < ApplicationRecord
   validates :email, presence: true, uniqueness: { case_sensitive: false }
   # Validates the format of the email attribute using the EMAIL_REGEX constant
   validates_format_of :email, with: EMAIL_REGEX, message: '%{value} is not a valid email address'
+
+  def self.search_by_any_attribute(attributes, keyword)
+    query = attributes.map { |attribute| attribute.to_s + ' LIKE :search_values' }.join(' OR ')
+    User.where(query, search_values: "%#{keyword}%")
+  end
 end

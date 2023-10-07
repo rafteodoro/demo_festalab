@@ -1,14 +1,56 @@
-<p style="color: green"><%= notice %></p>
-
-<h1>Users</h1>
-
-<div id="users">
-  <% @users.each do |user| %>
-    <%= render user %>
-    <p>
-      <%= link_to "Show this user", user %>
-    </p>
+<p style="color: green"><strong><%= notice %></strong></p>
+<div class="container">
+  <%# Check to see if the search params are there if so change the title to show the user what he's searching %>
+  <% if params["search"].nil? %>
+    <h1>Users</h1>
+  <% else %>
+    <h1>
+      Search results for "<%= params["search"] %>"
+      <span style="float: right"><%= link_to "Show all users", users_path, class:"btn btn-secondary" %></span>
+    </h1>
   <% end %>
-</div>
 
-<%= link_to "New user", new_user_path %>
+  <div class="d-flex my-3 justify-content-center">
+    <div class="col">
+      <%= link_to "New user", new_user_path, class:"btn btn-primary" %>
+    </div>
+    <%= form_with url: "/search", method: :get do |f| %>
+      <div class="row">
+        <div class="col-auto">
+          <%= f.text_field :search, placeholder: "keyword", class:"form-control"  %>
+        </div>
+        <div class="col-auto">
+          <%= f.submit "Search", class:"btn btn-primary" %>
+        </div>
+      </div>
+    <% end %>
+  </div>
+
+  <div id="users">
+    <table class="table table-striped">
+      <thead>
+        <tr>
+          <th>Name</th>
+          <th>Email</th>
+          <th>Phone</th>
+          <th>CPF</th>
+          <th>Details</th>
+        </tr>
+      </thead>
+      <tbody>
+        <tr>
+          <%# Check if there's users inside the @users variable %>
+          <% if @users.empty? %>
+            <%# If there's no users, show a message %>
+            <td colspan="5">No users found</td>
+          <%# If there's users, show them %>
+          <% else %>
+            <% @users.each do |user| %>
+              <%= render user %>
+            <% end %>
+          <% end %>
+        </tr>
+      </tbody>
+    </table>
+  </div>
+</div>
