@@ -3,6 +3,7 @@ class UsersController < ApplicationController
 
   # GET /users or /users.json
   def index
+    # Gets all the users by the search attributes
     @users = User.search_by_any_attribute(%i[name email phone cpf], params[:search])
   end
 

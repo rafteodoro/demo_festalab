@@ -5,7 +5,9 @@
     <h1>Users</h1>
   <% else %>
     <h1>
+      <%# The title changes so the user can see what he searched for %>
       Search results for "<%= params["search"] %>"
+      <%# A link to show all users appears so we can get out of the search %>
       <span style="float: right"><%= link_to "Show all users", users_path, class:"btn btn-secondary" %></span>
     </h1>
   <% end %>
@@ -26,6 +28,7 @@
     <% end %>
   </div>
 
+  <%# This table organizes the users to show %>
   <div id="users">
     <table class="table table-striped">
       <thead>

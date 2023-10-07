@@ -19,8 +19,10 @@ class User < ApplicationRecord
   # Validates the format of the email attribute using the EMAIL_REGEX constant
   validates_format_of :email, with: EMAIL_REGEX, message: '%{value} is not a valid email address'
 
+  # Defines the search method to be able to search by any attribute
   def self.search_by_any_attribute(attributes, keyword)
-    query = attributes.map { |attribute| attribute.to_s + ' LIKE :search_values' }.join(' OR ')
+    # Builds the query with the attributes and the keyword to search in the database
+    query = attributes.map { |attribute| "#{attribute} LIKE :search_values" }.join(' OR ')
     User.where(query, search_values: "%#{keyword}%")
   end
 end
