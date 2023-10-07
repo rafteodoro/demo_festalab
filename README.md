@@ -1,24 +1,15 @@
 # README
 
-This README would normally document whatever steps are necessary to get the
-application up and running.
+App made for the Vinklo challenge
 
-Things you may want to cover:
+User model with validation for
+  - Name presence
+  - Email presence, uniqueness and format
+  - Phone presence and format
+  - CPF presence, uniqueness and format
 
-* Ruby version
+Search function that lets you search by any attribute in the user model
 
-* System dependencies
+Seed ready with 5 users, just run 'rails db:seed' before starting the server
 
-* Configuration
-
-* Database creation
-
-* Database initialization
-
-* How to run the test suite
-
-* Services (job queues, cache servers, search engines, etc.)
-
-* Deployment instructions
-
-* ...
+Improved viewing using bootstrap
