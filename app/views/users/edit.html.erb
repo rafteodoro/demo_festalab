@@ -1,10 +1,10 @@
-<h1>Editing user</h1>
-
-<%= render "form", user: @user %>
-
-<br>
-
-<div>
-  <%= link_to "Show this user", @user %> |
-  <%= link_to "Back to users", users_path %>
+<div class="container my-3">
+  <h1>Editing <%= @user.name %></h1>
+ <div class="d-flex mb-3">
+    <%= link_to "Back", users_path, class:"btn btn-sm btn-secondary me-2" %>
+    <%= link_to "Show", user_path(@user), class:"btn btn-sm btn-primary me-2" %>
+  </div>
+  <div class="my-3">
+    <%= render "form", user: @user %>
+  </div>
 </div>
